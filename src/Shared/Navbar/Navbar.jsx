@@ -18,6 +18,9 @@ const Navbar = () => {
       <li>
         <Link>My College</Link>
       </li>
+      <li>
+        <Link to="/login">Login</Link>
+      </li>
     </>
   );
   return (

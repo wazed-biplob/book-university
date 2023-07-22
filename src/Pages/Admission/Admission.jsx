@@ -19,13 +19,9 @@ const Admission = () => {
                     rel="noopener noreferrer"
                     href="#"
                     className="mb-0 capitalize text-gray-100"
-                  >
-                    Photography
-                  </a>
+                  ></a>
                 </div>
-                <a rel="noopener noreferrer" href="#">
-                  See All
-                </a>
+                <a rel="noopener noreferrer" href="#"></a>
               </div>
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -41,7 +37,7 @@ const Admission = () => {
                 <div className="space-y-2">
                   <a rel="noopener noreferrer" href="#" className="block">
                     <h3 className="text-xl font-semibold text-violet-400">
-                      Facere ipsa nulla corrupti praesentium pariatur architecto
+                      {college?.CollegeName}
                     </h3>
                   </a>
                   <p className="leadi text-gray-400">
