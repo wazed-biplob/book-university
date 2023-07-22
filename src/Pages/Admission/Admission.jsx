@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Admission = () => {
   const [collegeData, setCollegeData] = useState([]);
@@ -37,7 +38,9 @@ const Admission = () => {
                 <div className="space-y-2">
                   <a rel="noopener noreferrer" href="#" className="block">
                     <h3 className="text-xl font-semibold text-violet-400">
-                      {college?.CollegeName}
+                      <Link to={`/candidate/${college?._id}`}>
+                        {college?.CollegeName}
+                      </Link>
                     </h3>
                   </a>
                   <p className="leadi text-gray-400">
