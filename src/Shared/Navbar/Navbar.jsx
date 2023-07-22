@@ -21,24 +21,34 @@ const Navbar = () => {
       <li>
         <Link to="my-college">My College</Link>
       </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
 
-      <li>
-        <Link
-          onClick={() => {
-            logOut()
-              .then((r) => console.log(""))
-              .catch((e) => console.log(e));
-          }}
-        >
-          Logout
-        </Link>
-      </li>
-      <li>
-        <Link to="/registration">Registration</Link>
-      </li>
+      {user ? (
+        <>
+          {" "}
+          <li>
+            <Link
+              onClick={() => {
+                logOut()
+                  .then((r) => console.log(""))
+                  .catch((e) => console.log(e));
+              }}
+            >
+              Logout
+            </Link>
+          </li>
+        </>
+      ) : (
+        <>
+          {" "}
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/registration">Registration</Link>
+          </li>
+        </>
+      )}
+
       <li>
         <Link to="">{user?.displayName}</Link>
       </li>

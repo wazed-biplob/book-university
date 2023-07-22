@@ -7,6 +7,7 @@ import Login from "../Pages/Login/Login";
 import Registration from "../Pages/Registration/Registration";
 import MyCollege from "../Pages/MyCollege/MyCollege";
 import Candidate from "../Pages/Candidate/Candidate";
+import PrivateRoute from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +22,14 @@ export const router = createBrowserRouter([
       { path: "/admission", element: <Admission /> },
       { path: "/login", element: <Login /> },
       { path: "/registration", element: <Registration /> },
-      { path: "/my-college", element: <MyCollege /> },
+      {
+        path: "/my-college",
+        element: (
+          <PrivateRoute>
+            <MyCollege />{" "}
+          </PrivateRoute>
+        ),
+      },
       { path: "/candidate/:id", element: <Candidate /> },
     ],
   },

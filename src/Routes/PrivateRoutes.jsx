@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useContext } from "react";
-import { AuthContext } from "../Providers/AuthProviders";
 import { Navigate, useLocation } from "react-router-dom";
+import { authContext } from "../Providers/AuthProvider";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading } = useContext(authContext);
   if (user) {
     return children;
   }
