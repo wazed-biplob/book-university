@@ -80,9 +80,9 @@ const Login = () => {
           <a
             rel="noopener noreferrer"
             href="#"
-            className="underline text-gray-100"
+            className="ms-4 underline text-gray-100"
           >
-            Sign up
+            Register
           </a>
         </p>
       </div>

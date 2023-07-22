@@ -19,6 +19,18 @@ const Registration = () => {
             />
           </div>
           <div className="space-y-1 text-sm">
+            <label for="username" className="block dark:text-gray-400">
+              Photo URL
+            </label>
+            <input
+              type="text"
+              name="photo"
+              id="username"
+              placeholder="Username"
+              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+            />
+          </div>
+          <div className="space-y-1 text-sm">
             <label for="password" className="block dark:text-gray-400">
               Password
             </label>
@@ -29,11 +41,18 @@ const Registration = () => {
               placeholder="Password"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
-            <div className="flex justify-end text-xs dark:text-gray-400">
-              <a rel="noopener noreferrer" href="#">
-                Forgot Password?
-              </a>
-            </div>
+          </div>
+          <div className="space-y-1 text-sm">
+            <label for="password" className="block dark:text-gray-400">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              name="conf_password"
+              id="conf_password"
+              placeholder="Password"
+              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+            />
           </div>
           <button className="border block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">
             Register Account
@@ -71,7 +90,7 @@ const Registration = () => {
           <a
             rel="noopener noreferrer"
             href="#"
-            className="underline dark:text-gray-100"
+            className="ms-4 underline dark:text-gray-100"
           >
             Signin
           </a>
