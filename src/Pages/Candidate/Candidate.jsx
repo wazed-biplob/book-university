@@ -1,15 +1,45 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { authContext } from "../../Providers/AuthProvider";
+import { useFetcher, useParams } from "react-router-dom";
 
 const Candidate = () => {
   const { user } = useContext(authContext);
-  console.log(user);
-  const location = window.location.href;
-  console.log(location);
+  const { id } = useParams();
+
+  const handleCandidateInfo = (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const candidate = {
+      candidateName: form.name.value,
+      candidateEmail: form.email.value,
+      collegeId: id,
+      subject: form.subject.value,
+      address: form.address.value,
+      phone: form.phone.value,
+      birthDate: form.date.value,
+      photoURL: form.photo.value,
+    };
+
+    fetch("http://localhost:5000/candidate-info", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(candidate),
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.insertedId) {
+          alert("Class Has Been Added Successfully.");
+        }
+      });
+  };
   return (
     <>
       <section className="p-6 bg-gray-800 text-gray-50">
         <form
+          onSubmit={handleCandidateInfo}
           novalidate=""
           action=""
           className="container flex flex-col mx-auto space-y-12"
@@ -29,6 +59,8 @@ const Candidate = () => {
                 </label>
                 <input
                   id="firstname"
+                  required
+                  name="name"
                   type="text"
                   className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
@@ -38,6 +70,8 @@ const Candidate = () => {
                   Subject
                 </label>
                 <input
+                  required
+                  name="subject"
                   id="lastname"
                   type="text"
                   className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
@@ -48,10 +82,10 @@ const Candidate = () => {
                   Candidate Email
                 </label>
                 <input
-                  disabled
+                  required
                   id="email"
                   type="email"
-                  placeholder={user?.email}
+                  name="email"
                   className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
@@ -61,8 +95,10 @@ const Candidate = () => {
                 </label>
                 <input
                   id="address"
+                  required
                   type="text"
                   placeholder=""
+                  name="address"
                   className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
@@ -72,8 +108,10 @@ const Candidate = () => {
                 </label>
                 <input
                   id="city"
+                  required
                   type="text"
                   placeholder=""
+                  name="phone"
                   className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
@@ -83,8 +121,10 @@ const Candidate = () => {
                 </label>
                 <input
                   id="state"
+                  required
                   type="text"
                   placeholder=""
+                  name="photo"
                   className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
@@ -94,11 +134,14 @@ const Candidate = () => {
                 </label>
                 <input
                   id="zip"
+                  required
                   type="date"
                   placeholder=""
+                  name="date"
                   className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                 />
               </div>
+              <button className="btn btn-wide">Submit</button>
             </div>
           </fieldset>
         </form>
