@@ -1,37 +1,100 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { authContext } from "../../Providers/AuthProvider";
+import { getAuth, updateProfile } from "firebase/auth";
+import { app } from "../../Firebase/Firebase";
+const auth = getAuth(app);
 const Registration = () => {
+  const { createUser, logOut } = useContext(authContext);
+  const handleRegistration = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const userName = form.name.value;
+    const photoURL = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(password);
+    const conf_password = form.conf_password.value;
+    if (password !== conf_password) {
+      const errorMsg = `Password Doesn't Match!`;
+
+      alert(errorMsg);
+      return;
+    } else if (password.length < 6) {
+      const errorMsg = `Password Must be at least 8 Characters.`;
+
+      alert(errorMsg);
+      return;
+    }
+
+    createUser(email, password)
+      .then((r) => {
+        updateProfile(auth.currentUser, {
+          displayName: userName,
+          photoURL: photoURL,
+        });
+
+        const message = "User Successfully Created.";
+
+        alert(message);
+        console.log(r.user);
+        logOut()
+          .then((r) => console.log(""))
+          .catch((e) => console.log(e));
+        // navigate("/login");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <>
       <div className="mx-auto w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-900 text-gray-100">
         <h1 className="text-2xl font-bold text-center">Registration</h1>
-        <form novalidate="" action="" className="space-y-6">
+        <form
+          onSubmit={handleRegistration}
+          noValidate=""
+          action=""
+          className="space-y-6"
+        >
           <div className="space-y-1 text-sm">
-            <label for="username" className="block dark:text-gray-400">
+            <label htmlFor="username" className="block text-white">
               Username
             </label>
             <input
               type="text"
-              name="username"
-              id="username"
+              name="name"
+              id="name"
               placeholder="Username"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="username" className="block dark:text-gray-400">
+            <label htmlFor="username" className="block dark:text-gray-400">
               Photo URL
             </label>
             <input
               type="text"
               name="photo"
-              id="username"
-              placeholder="Username"
+              id="photo"
+              placeholder="Photo URL"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="password" className="block dark:text-gray-400">
+            <label htmlFor="username" className="block text-white">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
+            />
+          </div>
+          <div className="space-y-1 text-sm">
+            <label htmlFor="password" className="block dark:text-gray-400">
               Password
             </label>
             <input
@@ -39,18 +102,18 @@ const Registration = () => {
               name="password"
               id="password"
               placeholder="Password"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="password" className="block dark:text-gray-400">
+            <label htmlFor="password" className="block dark:text-gray-400">
               Confirm Password
             </label>
             <input
               type="password"
               name="conf_password"
               id="conf_password"
-              placeholder="Password"
+              placeholder="Confirm Password"
               className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             />
           </div>
