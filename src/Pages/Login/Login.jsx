@@ -1,20 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
+import { authContext } from "../../Providers/AuthProvider";
 
 const Login = () => {
+  const from = location.state?.from?.pathname || "/";
+  const { signIn } = useContext(authContext);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    signIn(email, password)
+      .then((r) => {
+        console.log(r.user);
+      })
+      .catch((e) => {
+        alert(e.message);
+      });
+  };
   return (
     <>
       <div className="mx-auto w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-900 text-gray-100">
         <h1 className="text-2xl font-bold text-center">Login</h1>
-        <form novalidate="" action="" className="space-y-6">
+        <form
+          onSubmit={handleLogin}
+          novalidate=""
+          action=""
+          className="space-y-6"
+        >
           <div className="space-y-1 text-sm">
             <label for="username" className="block text-gray-400">
-              Username
+              Email
             </label>
             <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Username"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
               className="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-900 text-gray-100 focus:border-violet-400"
             />
           </div>
@@ -89,5 +111,4 @@ const Login = () => {
     </>
   );
 };
-
 export default Login;

@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import { authContext } from "../../Providers/AuthProvider";
 import { getAuth, updateProfile } from "firebase/auth";
 import { app } from "../../Firebase/Firebase";
+import { useNavigate } from "react-router-dom";
 const auth = getAuth(app);
+
 const Registration = () => {
   const { createUser, logOut } = useContext(authContext);
+  const navigate = useNavigate();
   const handleRegistration = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -40,7 +43,7 @@ const Registration = () => {
         logOut()
           .then((r) => console.log(""))
           .catch((e) => console.log(e));
-        // navigate("/login");
+        navigate("/login");
       })
       .catch((e) => {
         console.log(e);
