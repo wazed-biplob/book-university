@@ -17,8 +17,8 @@ const CollegeCard = () => {
           Favourite Colleges
         </h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-x-6">
-        {collegeData.map((college) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6">
+        {collegeData.slice(0, 3).map((college) => (
           <>
             <div className="flex border flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-900 dark:text-gray-100">
               <div className="flex space-x-4">
