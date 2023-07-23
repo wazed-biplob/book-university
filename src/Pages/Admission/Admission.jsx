@@ -27,12 +27,12 @@ const Admission = () => {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <img
-                    src="https://source.unsplash.com/random/480x360/?4"
+                    src={college.collegeImage}
                     alt=""
                     className="block object-cover object-center w-full rounded-md h-72 bg-gray-500"
                   />
                   <div className="flex items-center text-xs">
-                    <span>6 min ago</span>
+                    <span>Admission Date : {college.AdmissionDate}</span>
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -44,9 +44,7 @@ const Admission = () => {
                     </h3>
                   </a>
                   <p className="leadi text-gray-400">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Repellat, excepturi. Lorem ipsum dolor sit amet consectetur,
-                    adipisicing elit. Repellat, excepturi.
+                    {college.ResearchHistory}
                   </p>
                 </div>
               </div>

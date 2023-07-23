@@ -3,17 +3,40 @@ import { authContext } from "../../Providers/AuthProvider";
 
 const MyCollege = () => {
   const { user } = useContext(authContext);
-  const [collegeData, setCollegeData] = useState(null);
+  const [collegeData, setCollegeData] = useState({});
+  const {
+    CollegeName,
+    AdmissionDate,
+    ResearchHistory,
+    ResearchWorks,
+    admissionProcess,
+    collegeImage,
+    Events,
+    Sports,
+  } = collegeData;
 
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
+  console.log(userData);
+  const {
+    address,
+    birthDate,
+    candidateName,
+    candidateEmail,
+    phone,
+    photoURL,
+    subject,
+  } = userData;
+
   useEffect(() => {
     fetch(`http://localhost:5000/my-college/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setUserData(data.result[0]);
         setCollegeData(data.resultCollege[0]);
+        console.log(data.result[0]);
       });
   }, []);
+
   const handleFeedback = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,7 +46,7 @@ const MyCollege = () => {
       form.reset();
       return;
     }
-    const rating = form.rating.value.toFixed(1);
+    const rating = form.rating.value;
 
     const review = {
       feedback: form.feedback?.value,
@@ -51,61 +74,69 @@ const MyCollege = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-8">
         <div className="flex justify-center">
           <div className="max-w-lg p-4 shadow-md dark:dark:bg-gray-900 dark:dark:text-gray-100">
-            <div className="flex justify-between pb-4 border-bottom">
-              <div className="flex items-center">
-                <a
-                  rel="noopener noreferrer"
-                  href="#"
-                  className="mb-0 capitalize dark:dark:text-gray-100"
-                >
-                  Photography
-                </a>
-              </div>
-              <a rel="noopener noreferrer" href="#">
-                See All
-              </a>
-            </div>
             <div className="space-y-4">
               <div className="space-y-2">
                 <img
-                  src="https://source.unsplash.com/random/480x360/?4"
+                  src={collegeImage}
                   alt=""
                   className="block object-cover object-center w-full rounded-md h-72 dark:dark:bg-gray-500"
                 />
-                <div className="flex items-center text-xs">
-                  <span>6 min ago</span>
-                </div>
               </div>
               <div className="space-y-2">
                 <a rel="noopener noreferrer" href="#" className="block">
                   <h3 className="text-xl font-semibold dark:dark:text-violet-400">
-                    Facere ipsa nulla corrupti praesentium pariatur architecto
+                    {CollegeName}
                   </h3>
                 </a>
                 <p className="leadi dark:dark:text-gray-400">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Repellat, excepturi. Lorem ipsum dolor sit amet consectetur,
-                  adipisicing elit. Repellat, excepturi.
+                  {ResearchHistory}
+                </p>
+
+                <p className="text-sm dark:text-gray-400">
+                  <span className="font-extrabold">Admission</span> :{" "}
+                  {AdmissionDate}
+                </p>
+                <p className="text-sm dark:text-gray-400">
+                  <span className="font-extrabold">Admission Process : </span> :{" "}
+                  {admissionProcess}
+                </p>
+                <p>
+                  <span className="font-extrabold">Events</span> :
+                  {Events?.map((event) => (
+                    <li>{event}</li>
+                  ))}
+                </p>
+                <p>
+                  <span className="font-extrabold">Research</span> :
+                  {ResearchWorks?.map((r) => (
+                    <li>{r}</li>
+                  ))}
                 </p>
               </div>
             </div>
           </div>
         </div>
         <div className="flex flex-col items-center">
-          <div className="max-w-md p-8 sm:flex sm:space-x-6 bg-gray-900 text-gray-100">
+          <div className="max-w-md p-8 items-center sm:flex sm:space-x-6 bg-gray-900 text-gray-100">
             <div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
               <img
-                src="https://source.unsplash.com/100x100/?portrait?1"
+                src={photoURL}
                 alt=""
                 className="object-cover object-center w-full h-full rounded dark:dark:bg-gray-500"
               />
             </div>
             <div className="flex flex-col space-y-4">
               <div>
-                <h2 className="text-2xl font-semibold">Leroy Jenkins</h2>
+                <h2 className="text-2xl font-semibold">{candidateName}</h2>
                 <span className="text-sm dark:dark:text-gray-400">
-                  General manager
+                  Subject : {subject}
                 </span>
+                <p className="text-sm dark:dark:text-gray-400">
+                  BirthDate : {birthDate}
+                </p>
+                <p className="text-sm dark:dark:text-gray-400">
+                  Address : {address}
+                </p>
               </div>
               <div className="space-y-1">
                 <span className="flex items-center space-x-2">
@@ -121,7 +152,7 @@ const MyCollege = () => {
                     ></path>
                   </svg>
                   <span className="dark:dark:text-gray-400">
-                    leroy.jenkins@company.com
+                    {candidateEmail}
                   </span>
                 </span>
                 <span className="flex items-center space-x-2">
@@ -136,9 +167,7 @@ const MyCollege = () => {
                       d="M449.366,89.648l-.685-.428L362.088,46.559,268.625,171.176l43,57.337a88.529,88.529,0,0,1-83.115,83.114l-57.336-43L46.558,362.088l42.306,85.869.356.725.429.684a25.085,25.085,0,0,0,21.393,11.857h22.344A327.836,327.836,0,0,0,461.222,133.386V111.041A25.084,25.084,0,0,0,449.366,89.648Zm-20.144,43.738c0,163.125-132.712,295.837-295.836,295.837h-18.08L87,371.76l84.18-63.135,46.867,35.149h5.333a120.535,120.535,0,0,0,120.4-120.4v-5.333l-35.149-46.866L371.759,87l57.463,28.311Z"
                     ></path>
                   </svg>
-                  <span className="dark:dark:text-gray-400">
-                    +25 381 77 983
-                  </span>
+                  <span className="dark:dark:text-gray-400">{phone}</span>
                 </span>
               </div>
             </div>

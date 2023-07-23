@@ -1,58 +1,54 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const College = () => {
-  const [collegeData, setCollegeData] = useState([]);
+  const [colleges, setColleges] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:5000/college")
       .then((res) => res.json())
-      .then((data) => setCollegeData(data));
+      .then((data) => setColleges(data));
   }, []);
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {collegeData.map((college) => (
-          <div>
-            <div className="max-w-lg p-4 shadow-md bg-gray-900 text-gray-100">
-              <div className="flex justify-between pb-4 border-bottom">
-                <div className="flex items-center">
-                  <a
-                    rel="noopener noreferrer"
-                    href="#"
-                    className="mb-0 capitalize text-gray-100"
-                  >
-                    Photography
-                  </a>
-                </div>
-                <a rel="noopener noreferrer" href="#">
-                  See All
-                </a>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6">
+        {colleges?.map((college) => (
+          <>
+            <div className="flex border flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-900 dark:text-gray-100">
+              <div>
+                <img
+                  src={college.collegeImage}
+                  alt=""
+                  className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500"
+                />
+                <h2 className="mb-1 text-xl font-semibold">
+                  {college.CollegeName}
+                </h2>
+                <p className="text-sm dark:text-gray-400">
+                  <span className="font-extrabold">Admission</span> :{" "}
+                  {college.AdmissionDate}
+                </p>
+
+                <p className="text-sm dark:text-gray-400">
+                  <span className="font-extrabold">Research History</span> :
+                  {college.ResearchHistory}
+                </p>
+                <p>
+                  <span className="font-extrabold">Research Works</span> :
+                  {college.ResearchWorks.map((r) => (
+                    <li>{r}</li>
+                  ))}
+                </p>
               </div>
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <img
-                    src="https://source.unsplash.com/random/480x360/?4"
-                    alt=""
-                    className="block object-cover object-center w-full rounded-md h-72 bg-gray-500"
-                  />
-                  <div className="flex items-center text-xs">
-                    <span>6 min ago</span>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <a rel="noopener noreferrer" href="#" className="block">
-                    <h3 className="text-xl font-semibold text-violet-400">
-                      Facere ipsa nulla corrupti praesentium pariatur architecto
-                    </h3>
-                  </a>
-                  <p className="leadi text-gray-400">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Repellat, excepturi. Lorem ipsum dolor sit amet consectetur,
-                    adipisicing elit. Repellat, excepturi.
-                  </p>
+              <div className="flex flex-wrap justify-center">
+                <div>
+                  <Link to={`/college-details/${college._id}`}>
+                    <button className="btn btn-info btn-wide">Details</button>
+                  </Link>
                 </div>
               </div>
             </div>
-          </div>
+          </>
         ))}
       </div>
     </>

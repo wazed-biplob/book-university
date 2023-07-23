@@ -8,18 +8,19 @@ const Review = () => {
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
+
   return (
     <div>
-      {reviews?.map((review) => (
-        <>
-          <div>
-            <h1
-              style={{ fontSize: "32px" }}
-              className="my-4 text-center font-extrabold"
-            >
-              Reviews
-            </h1>
-          </div>
+      <div>
+        <h1
+          style={{ fontSize: "32px" }}
+          className="my-4 text-center font-extrabold"
+        >
+          Reviews
+        </h1>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {reviews?.map((review) => (
           <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 bg-gray-900 text-gray-100">
             <div className="flex justify-between p-4">
               <div className="flex space-x-4">
@@ -52,8 +53,8 @@ const Review = () => {
               {review.feedback}
             </div>
           </div>
-        </>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
