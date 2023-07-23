@@ -8,6 +8,7 @@ import Registration from "../Pages/Registration/Registration";
 import MyCollege from "../Pages/MyCollege/MyCollege";
 import Candidate from "../Pages/Candidate/Candidate";
 import PrivateRoute from "./PrivateRoutes";
+import CollegeDetails from "../Pages/CollegeDetails/CollegeDetails";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ export const router = createBrowserRouter([
         ),
       },
       { path: "/candidate/:id", element: <Candidate /> },
+      {
+        path: "/college-details/:id",
+        element: (
+          <PrivateRoute>
+            <CollegeDetails />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

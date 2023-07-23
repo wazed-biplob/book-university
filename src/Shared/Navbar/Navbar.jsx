@@ -17,6 +17,10 @@ const Navbar = () => {
     const result = collegeData.filter(
       (college) => college.CollegeName === search
     );
+    if (result.length === 0) {
+      alert("Please, write the examct Name. Search is case-sensitive.");
+      return;
+    }
     setSearch(result);
   };
   const navLinks = (
