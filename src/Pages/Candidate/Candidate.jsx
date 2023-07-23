@@ -44,7 +44,7 @@ const Candidate = () => {
           action=""
           className="container flex flex-col mx-auto space-y-12"
         >
-          <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900">
+          <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-900">
             <div className="space-y-2 col-span-full lg:col-span-1">
               <p className="font-medium">Personal Inormation</p>
               <p className="text-xs">
@@ -62,7 +62,7 @@ const Candidate = () => {
                   required
                   name="name"
                   type="text"
-                  className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                  className="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 text-gray-900"
                 />
               </div>
               <div className="col-span-full sm:col-span-3">
@@ -74,7 +74,7 @@ const Candidate = () => {
                   name="subject"
                   id="lastname"
                   type="text"
-                  className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                  className="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 text-gray-900"
                 />
               </div>
               <div className="col-span-full sm:col-span-3">
@@ -86,7 +86,7 @@ const Candidate = () => {
                   id="email"
                   type="email"
                   name="email"
-                  className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                  className="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 text-gray-900"
                 />
               </div>
               <div className="col-span-full">
@@ -99,7 +99,7 @@ const Candidate = () => {
                   type="text"
                   placeholder=""
                   name="address"
-                  className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                  className="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 text-gray-900"
                 />
               </div>
               <div className="col-span-full sm:col-span-2">
@@ -112,7 +112,7 @@ const Candidate = () => {
                   type="text"
                   placeholder=""
                   name="phone"
-                  className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                  className="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 text-gray-900"
                 />
               </div>
               <div className="col-span-full sm:col-span-2">
@@ -125,7 +125,7 @@ const Candidate = () => {
                   type="text"
                   placeholder=""
                   name="photo"
-                  className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                  className="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 text-gray-900"
                 />
               </div>
               <div className="col-span-full sm:col-span-2">
@@ -138,7 +138,7 @@ const Candidate = () => {
                   type="date"
                   placeholder=""
                   name="date"
-                  className="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                  className="w-full rounded-md focus:ring focus:ri focus:ri border-gray-700 text-gray-900"
                 />
               </div>
               <button className="btn btn-wide">Submit</button>

@@ -6,6 +6,8 @@ const Navbar = () => {
   const { user, logOut } = useContext(authContext);
   const [collegeData, setCollegeData] = useState([]);
   const [search, setSearch] = useState(null);
+  const [hasCollege, setHasCollege] = useState(true);
+
   useEffect(() => {
     fetch("http://localhost:5000/college")
       .then((res) => res.json())
@@ -36,9 +38,16 @@ const Navbar = () => {
       <li>
         <Link to="/admission">Admission</Link>
       </li>
-      <li>
-        <Link to="my-college">My College</Link>
-      </li>
+      {hasCollege ? (
+        <>
+          {" "}
+          <li>
+            <Link to="my-college">My College</Link>
+          </li>
+        </>
+      ) : (
+        ""
+      )}
 
       {user ? (
         <>

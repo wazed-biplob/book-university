@@ -121,7 +121,7 @@ const ResearchPaper = () => {
               </div>
               <span className="text-sm">
                 Liked by
-                <span className="font-semibold">Mamba UI</span>and
+                <span className="font-semibold"></span>and
                 <span className="font-semibold">86 others</span>
               </span>
             </div>

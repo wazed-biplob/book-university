@@ -1,8 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const MyCollege = () => {
   const { user } = useContext(authContext);
+  useEffect(() => {
+    fetch(`http://localhost:5000/my-college/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data?.resultCollege) {
+          alert(`You don't have booked any college`);
+          navigate("/admission");
+        } else {
+          setUserData(data?.result[0]);
+          setCollegeData(data?.resultCollege[0]);
+          console.log(data?.result[0]);
+        }
+      });
+  }, []);
   const [collegeData, setCollegeData] = useState({});
   const {
     CollegeName,
@@ -17,6 +32,7 @@ const MyCollege = () => {
 
   const [userData, setUserData] = useState({});
   console.log(userData);
+  const navigate = useNavigate();
   const {
     address,
     birthDate,
@@ -26,16 +42,6 @@ const MyCollege = () => {
     photoURL,
     subject,
   } = userData;
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/my-college/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setUserData(data.result[0]);
-        setCollegeData(data.resultCollege[0]);
-        console.log(data.result[0]);
-      });
-  }, []);
 
   const handleFeedback = (e) => {
     e.preventDefault();
@@ -83,11 +89,11 @@ const MyCollege = () => {
                 />
               </div>
               <div className="space-y-2">
-                <a rel="noopener noreferrer" href="#" className="block">
+                <p className="block">
                   <h3 className="text-xl font-semibold dark:dark:text-violet-400">
                     {CollegeName}
                   </h3>
-                </a>
+                </p>
                 <p className="leadi dark:dark:text-gray-400">
                   {ResearchHistory}
                 </p>

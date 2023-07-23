@@ -1,13 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { authContext } from "../../Providers/AuthProvider";
 
 const Admission = () => {
   const [collegeData, setCollegeData] = useState([]);
+  const { user } = useContext(authContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    fetch(`http://localhost:5000/my-college/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const candidate = data.result[0];
+        if (candidate) {
+          alert(`You've already book an admission`);
+          navigate("/my-college");
+        }
+      });
+  }, []);
   useEffect(() => {
     fetch("http://localhost:5000/college")
       .then((res) => res.json())
       .then((data) => setCollegeData(data));
   }, []);
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

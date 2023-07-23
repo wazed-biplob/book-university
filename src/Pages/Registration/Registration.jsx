@@ -81,7 +81,7 @@ const Registration = () => {
               name="photo"
               id="photo"
               placeholder="Photo URL"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
             />
           </div>
           <div className="space-y-1 text-sm">
@@ -109,7 +109,7 @@ const Registration = () => {
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label htmlFor="password" className="block dark:text-gray-400">
+            <label htmlFor="password" className="block dark:text-black-400">
               Confirm Password
             </label>
             <input
@@ -117,7 +117,7 @@ const Registration = () => {
               name="conf_password"
               id="conf_password"
               placeholder="Confirm Password"
-              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 text-black focus:dark:border-violet-400"
             />
           </div>
           <button className="border block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">
@@ -155,7 +155,7 @@ const Registration = () => {
           Already have an account?
           <a
             rel="noopener noreferrer"
-            href="#"
+            href="/login"
             className="ms-4 underline dark:text-gray-100"
           >
             Signin

@@ -8,7 +8,7 @@ const Banner = () => {
           <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
             <h1 className="text-5xl font-bold leadi sm:text-6xl">
               Book Your
-              <span className="dark:text-violet-400"> University</span>
+              <span className="dark:text-violet-400"> College</span>
             </h1>
             <p className="mt-6 mb-8 text-lg sm:mb-12">
               Unlock Your Future at Our College Booking! Discover the Perfect
