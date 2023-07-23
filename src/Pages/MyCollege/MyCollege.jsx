@@ -1,6 +1,51 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { authContext } from "../../Providers/AuthProvider";
 
 const MyCollege = () => {
+  const { user } = useContext(authContext);
+  const [collegeData, setCollegeData] = useState(null);
+
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    fetch(`http://localhost:5000/my-college/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserData(data.result[0]);
+        setCollegeData(data.resultCollege[0]);
+      });
+  }, []);
+  const handleFeedback = (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    if (form.rating.value > 5 || form.rating.value < 0) {
+      alert("Put a value between 1.0 to 5.0");
+      form.reset();
+      return;
+    }
+    const rating = form.rating.value.toFixed(1);
+
+    const review = {
+      feedback: form.feedback?.value,
+      collegeName: collegeData?.CollegeName,
+      userName: userData?.candidateName,
+      photoURL: userData?.photoURL,
+      rating: rating,
+    };
+    fetch("http://localhost:5000/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(review),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          alert("Review Successfully Added");
+        }
+      });
+  };
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-8">
@@ -107,19 +152,39 @@ const MyCollege = () => {
                 <div className="flex flex-col items-center py-6 space-y-3">
                   <span className="text-center">How was your experience?</span>
                 </div>
-                <div className="flex flex-col w-full">
+
+                <form
+                  onSubmit={handleFeedback}
+                  className="flex flex-col w-full"
+                >
+                  <fieldset className="w-full space-y-1 dark:text-gray-100 mb-4">
+                    <div className="flex">
+                      <span className="flex items-center px-3 pointer-events-none sm:text-sm rounded-l-md dark:bg-gray-700">
+                        Rating
+                      </span>
+                      <input
+                        type="number"
+                        style={{ outline: "none", paddingLeft: "4px" }}
+                        id="url"
+                        name="rating"
+                        placeholder="Rate us ranging from 1.0 to 5"
+                        className="flex flex-1 border sm:text-sm rounded-r-md dark:border-gray-700 dark:text-gray-100 dark:bg-gray-800"
+                      />
+                    </div>
+                  </fieldset>
                   <textarea
                     rows="3"
                     placeholder="Message..."
+                    name="feedback"
                     className="p-4 rounded-md resize-none text-gray-100 bg-gray-900"
                   ></textarea>
                   <button
-                    type="button"
+                    type="submit"
                     className="py-4 my-8 font-semibold rounded-md text-gray-900 bg-violet-400"
                   >
                     Post feedback
                   </button>
-                </div>
+                </form>
               </div>
             </div>
           </div>
