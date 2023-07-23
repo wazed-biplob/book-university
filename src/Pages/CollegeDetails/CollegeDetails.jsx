@@ -19,9 +19,9 @@ const CollegeDetails = () => {
       <div className="bg-gray-800 text-gray-50">
         <div className="container grid grid-cols-12 mx-auto bg-gray-900">
           <div
-            className="bg-no-repeat bg-cover bg-gray-700 col-span-full lg:col-span-4"
+            className="bg-no-repeat bg-cover bg-gray-500 col-span-full lg:col-span-4"
             style={{
-              backgroundImage: `url('https://source.unsplash.com/random/640x480')`,
+              backgroundImage: `url(${college?.collegeImage})`,
               backgroundPosition: "center center",
               backgroundBlendMode: `multiply`,
               backgroundSize: "cover",
