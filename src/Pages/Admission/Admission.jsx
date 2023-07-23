@@ -7,7 +7,7 @@ const Admission = () => {
   const { user } = useContext(authContext);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:5000/my-college/${user?.email}`)
+    fetch(`https://book-university-server.vercel.app/my-college/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         const candidate = data.result[0];
@@ -18,7 +18,7 @@ const Admission = () => {
       });
   }, []);
   useEffect(() => {
-    fetch("http://localhost:5000/college")
+    fetch("https://book-university-server.vercel.app/college")
       .then((res) => res.json())
       .then((data) => setCollegeData(data));
   }, []);

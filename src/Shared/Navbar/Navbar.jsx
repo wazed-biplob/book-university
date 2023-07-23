@@ -3,13 +3,27 @@ import { Link } from "react-router-dom";
 import { authContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(authContext);
+  const { user, logOut, loading } = useContext(authContext);
   const [collegeData, setCollegeData] = useState([]);
   const [search, setSearch] = useState(null);
-  const [hasCollege, setHasCollege] = useState(true);
+  const { hasCollege, setHasCollege } = useContext(authContext);
+  useEffect(() => {
+    fetch(`https://book-university-server.vercel.app/candidate/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("l", loading);
+        console.log("d", data);
+        if (data.length === 0) {
+          setHasCollege(false);
+        } else if (data.length !== 0) {
+          setHasCollege(true);
+        }
+      });
+  }, [user]);
+  console.log(hasCollege);
 
   useEffect(() => {
-    fetch("http://localhost:5000/college")
+    fetch("https://book-university-server.vercel.app/college")
       .then((res) => res.json())
       .then((data) => setCollegeData(data));
   }, []);
@@ -76,8 +90,20 @@ const Navbar = () => {
         </>
       )}
 
-      <li>
-        <Link to="">{user?.displayName}</Link>
+      <li className="flex items-center right-0">
+        <Link to="">
+          {user?.photoURL && (
+            <>
+              {" "}
+              <img
+                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                src={user?.photoURL}
+                alt="image"
+              />
+            </>
+          )}
+          {user?.displayName}
+        </Link>
       </li>
     </>
   );
@@ -112,7 +138,9 @@ const Navbar = () => {
           <a className="btn btn-ghost normal-case text-xl">Book College</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
+          <ul className="flex items-center menu menu-horizontal px-1">
+            {navLinks}
+          </ul>
         </div>
         <div className="navbar-end">
           <form onSubmit={handleSearch} className="form-control">

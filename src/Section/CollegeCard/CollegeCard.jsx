@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const CollegeCard = () => {
   const [collegeData, setCollegeData] = useState([]);
-  console.log(collegeData);
+
   useEffect(() => {
-    fetch("http://localhost:5000/college")
+    fetch("https://book-university-server.vercel.app/college")
       .then((res) => res.json())
       .then((data) => setCollegeData(data));
   }, []);

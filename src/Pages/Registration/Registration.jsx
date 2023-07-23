@@ -15,7 +15,7 @@ const Registration = () => {
     const photoURL = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(password);
+  
     const conf_password = form.conf_password.value;
     if (password !== conf_password) {
       const errorMsg = `Password Doesn't Match!`;
@@ -39,7 +39,7 @@ const Registration = () => {
         const message = "User Successfully Created.";
 
         alert(message);
-        console.log(r.user);
+    
         logOut()
           .then((r) => console.log(""))
           .catch((e) => console.log(e));

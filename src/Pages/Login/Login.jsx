@@ -14,7 +14,7 @@ const Login = () => {
 
     signIn(email, password)
       .then((r) => {
-        console.log(r.user);
+     
         navigate(from);
       })
       .catch((e) => {

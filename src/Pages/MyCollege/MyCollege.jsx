@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const MyCollege = () => {
   const { user } = useContext(authContext);
   useEffect(() => {
-    fetch(`http://localhost:5000/my-college/${user?.email}`)
+    fetch(`https://book-university-server.vercel.app/my-college/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         if (!data?.resultCollege) {
@@ -14,7 +14,6 @@ const MyCollege = () => {
         } else {
           setUserData(data?.result[0]);
           setCollegeData(data?.resultCollege[0]);
-          console.log(data?.result[0]);
         }
       });
   }, []);
@@ -31,7 +30,7 @@ const MyCollege = () => {
   } = collegeData;
 
   const [userData, setUserData] = useState({});
-  console.log(userData);
+
   const navigate = useNavigate();
   const {
     address,
@@ -61,7 +60,7 @@ const MyCollege = () => {
       photoURL: userData?.photoURL,
       rating: rating,
     };
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://book-university-server.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -72,6 +71,7 @@ const MyCollege = () => {
       .then((data) => {
         if (data.insertedId) {
           alert("Review Successfully Added");
+          form.reset();
         }
       });
   };
@@ -198,10 +198,11 @@ const MyCollege = () => {
                         Rating
                       </span>
                       <input
-                        type="number"
+                        type="text"
                         style={{ outline: "none", paddingLeft: "4px" }}
                         id="url"
                         name="rating"
+                        required
                         placeholder="Rate us ranging from 1.0 to 5"
                         className="flex flex-1 border sm:text-sm rounded-r-md dark:border-gray-700 dark:text-gray-100 dark:bg-gray-800"
                       />
@@ -209,13 +210,14 @@ const MyCollege = () => {
                   </fieldset>
                   <textarea
                     rows="3"
+                    required
                     placeholder="Message..."
                     name="feedback"
-                    className="p-4 rounded-md resize-none text-gray-100 bg-gray-900"
+                    className="p-4 w-full rounded-md resize-none text-gray-100 bg-gray-900"
                   ></textarea>
                   <button
                     type="submit"
-                    className="py-4 my-8 font-semibold rounded-md text-gray-900 bg-violet-400"
+                    className="py-4 btn-wide my-8 font-semibold rounded-md text-gray-900 bg-violet-400"
                   >
                     Post feedback
                   </button>

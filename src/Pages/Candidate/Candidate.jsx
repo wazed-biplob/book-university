@@ -3,7 +3,7 @@ import { authContext } from "../../Providers/AuthProvider";
 import { useFetcher, useParams } from "react-router-dom";
 
 const Candidate = () => {
-  const { user } = useContext(authContext);
+  const { user, setHasCollege } = useContext(authContext);
   const { id } = useParams();
 
   const handleCandidateInfo = (e) => {
@@ -21,7 +21,7 @@ const Candidate = () => {
       photoURL: form.photo.value,
     };
 
-    fetch("http://localhost:5000/candidate-info", {
+    fetch("https://book-university-server.vercel.app/candidate-info", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -31,6 +31,7 @@ const Candidate = () => {
       .then((r) => r.json())
       .then((d) => {
         if (d.insertedId) {
+          setHasCollege(true);
           alert("Class Has Been Added Successfully.");
         }
       });

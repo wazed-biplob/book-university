@@ -4,10 +4,9 @@ import { useParams } from "react-router-dom";
 const CollegeDetails = () => {
   const { id } = useParams();
   const [college, setCollege] = useState(null);
-  console.log(college);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/college/${id}`)
+    fetch(`https://book-university-server.vercel.app/college/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setCollege(data);
