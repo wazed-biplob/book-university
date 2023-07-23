@@ -25,7 +25,7 @@ const CollegeCard = () => {
             <div className="flex border flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-900 dark:text-gray-100">
               <div>
                 <img
-                  src="https://source.unsplash.com/random/100x100/?5"
+                  src={college.collegeImage}
                   alt=""
                   className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500"
                 />
