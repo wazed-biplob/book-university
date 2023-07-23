@@ -1,10 +1,24 @@
-import React, { useContext } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = useContext(authContext);
-  console.log(user);
+  const [collegeData, setCollegeData] = useState([]);
+  const [search, setSearch] = useState(null);
+  useEffect(() => {
+    fetch("http://localhost:5000/college")
+      .then((res) => res.json())
+      .then((data) => setCollegeData(data));
+  }, []);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const search = e.target.search.value;
+    const result = collegeData.filter(
+      (college) => college.CollegeName === search
+    );
+    setSearch(result);
+  };
   const navLinks = (
     <>
       <li>
@@ -88,14 +102,63 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end">
-          <div className="form-control">
+          <form onSubmit={handleSearch} className="form-control">
             <input
               type="text"
-              placeholder="Search"
+              name="search"
+              placeholder="Search College"
               className="input input-bordered w-24 md:w-auto"
             />
-          </div>
+          </form>
         </div>
+      </div>
+      <div>
+        {search?.map((s) => (
+          <>
+            <div>
+              <h1 className="font-extrabold mt-8 mb-2">Search Results</h1>
+              {search?.length} result(s) Found
+            </div>
+            <div className="mb-8">
+              <div className="max-w-lg p-4 shadow-md bg-gray-900 text-gray-100">
+                <div className="flex justify-between pb-4 border-bottom">
+                  <div className="flex items-center">
+                    <a
+                      rel="noopener noreferrer"
+                      href="#"
+                      className="mb-0 capitalize text-gray-100"
+                    ></a>
+                  </div>
+                  <a rel="noopener noreferrer" href="#"></a>
+                </div>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <img
+                      src="https://source.unsplash.com/random/480x360/?4"
+                      alt=""
+                      className="block object-cover object-center w-full rounded-md h-72 bg-gray-500"
+                    />
+                    <div className="flex items-center text-xs">
+                      <span>6 min ago</span>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <a rel="noopener noreferrer" href="#" className="block">
+                      <h3 className="text-xl font-semibold text-violet-400">
+                        <Link to={``}>{}</Link>
+                      </h3>
+                    </a>
+                    <p className="leadi text-gray-400">
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                      Repellat, excepturi. Lorem ipsum dolor sit amet
+                      consectetur, adipisicing elit. Repellat, excepturi.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ))}
       </div>
     </>
   );

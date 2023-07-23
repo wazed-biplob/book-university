@@ -12,7 +12,7 @@ const CollegeCard = () => {
       <div>
         <h1
           style={{ fontSize: "32px" }}
-          className="my-4 text-center font-extrabold"
+          className="mt-8 mb-2 text-center font-extrabold"
         >
           Favourite Colleges
         </h1>
