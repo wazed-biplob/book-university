@@ -22,7 +22,7 @@ const Subscribe = () => {
           <div className="flex flex-row">
             <input
               type="text"
-              placeholder="example@email.com"
+              placeholder="Your Email"
               className="w-3/5 p-3 rounded-l-lg sm:w-2/3"
             />
             <button
