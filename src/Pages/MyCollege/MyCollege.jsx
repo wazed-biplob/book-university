@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { authContext } from "../../Providers/AuthProvider";
+import { AuthContext } from "../../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const MyCollege = () => {
-  const { user } = useContext(authContext);
+  const { user } = useContext(AuthContext);
   useEffect(() => {
     fetch(`https://book-university-server.vercel.app/my-college/${user?.email}`)
       .then((res) => res.json())

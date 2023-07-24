@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { authContext } from "../../Providers/AuthProvider";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Admission = () => {
   const [collegeData, setCollegeData] = useState([]);
-  const { user } = useContext(authContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
     fetch(`https://book-university-server.vercel.app/my-college/${user?.email}`)
@@ -25,7 +25,10 @@ const Admission = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div
+        style={{ justifyItems: "center" }}
+        className="grid grid-cols-1 mt-4 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      >
         {collegeData.map((college) => (
           <div>
             <div className="max-w-lg p-4 shadow-md bg-gray-900 text-gray-100">

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { authContext } from "../../Providers/AuthProvider";
+import { AuthContext } from "../../Providers/AuthProvider";
 import { useFetcher, useParams } from "react-router-dom";
 
 const Candidate = () => {
-  const { user, setHasCollege } = useContext(authContext);
+  const { user, setHasCollege } = useContext(AuthContext);
   const { id } = useParams();
 
   const handleCandidateInfo = (e) => {

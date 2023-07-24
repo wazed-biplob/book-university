@@ -19,7 +19,10 @@ const CollegeCard = () => {
           Favourite Colleges
         </h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6">
+      <div
+        style={{ justifyItems: "center" }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6"
+      >
         {collegeData.slice(0, 3).map((college) => (
           <>
             <div className="flex border flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-900 dark:text-gray-100">
@@ -57,7 +60,16 @@ const CollegeCard = () => {
               <div className="flex flex-wrap justify-center">
                 <div>
                   <Link to={`/college-details/${college._id}`}>
-                    <button className="btn btn-info btn-wide">Details</button>
+                    <button
+                      style={{
+                        width: "200px",
+                        height: "40px",
+                        border: "1px solid lightblue",
+                      }}
+                      className="border btn btn-info "
+                    >
+                      Details
+                    </button>
                   </Link>
                 </div>
               </div>

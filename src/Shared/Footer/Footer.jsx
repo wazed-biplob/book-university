@@ -22,7 +22,7 @@ const Footer = () => {
                 </svg>
               </div>
               <span className="self-center text-2xl font-semibold">
-                Book College
+                College Booker
               </span>
             </a>
           </div>
@@ -139,7 +139,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="py-6 text-sm text-center dark:text-gray-400">
-          © 1968 Company Co. All rights reserved.
+          © 2023 College Booker. All rights reserved.
         </div>
       </footer>
     </div>

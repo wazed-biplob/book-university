@@ -18,8 +18,11 @@ const ResearchPaper = () => {
         </h1>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {research.map((r) => (
+      <div
+        style={{ justifyItems: "center" }}
+        className="grid mb-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      >
+        {research?.slice(0, 3).map((r) => (
           <div className="rounded-md shadow-md sm:w-96 dark:bg-gray-900 dark:text-gray-100">
             <div className="flex items-center justify-between p-3">
               <div className="flex items-center space-x-2">
@@ -48,7 +51,7 @@ const ResearchPaper = () => {
               </button>
             </div>
             <img
-              src="https://i.ibb.co/d09qdyX/r.jpg"
+              src="https://i.ibb.co/MS8xSt4/r2.jpg"
               alt=""
               className="object-cover object-center w-full h-72 dark:bg-gray-500"
             />
@@ -140,11 +143,6 @@ const ResearchPaper = () => {
                   <p className="text-base font-semibold">{r.authorEmail}</p>
                   {r.researchDescription}
                 </p>
-                <input
-                  type="text"
-                  placeholder="Add a comment..."
-                  className="w-full py-0.5 dark:bg-transparent border-none rounded text-sm pl-0 dark:text-gray-100"
-                />
               </div>
             </div>
           </div>

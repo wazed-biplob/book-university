@@ -139,7 +139,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="py-6 text-sm text-center dark:text-gray-400">
-          © 2023 Book College. All rights reserved.
+          © 2023 College Booker. All rights reserved.
         </div>
       </footer>
     </>

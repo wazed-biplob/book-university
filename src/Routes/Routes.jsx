@@ -9,6 +9,7 @@ import MyCollege from "../Pages/MyCollege/MyCollege";
 import Candidate from "../Pages/Candidate/Candidate";
 import PrivateRoute from "./PrivateRoutes";
 import CollegeDetails from "../Pages/CollegeDetails/CollegeDetails";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -42,4 +43,5 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  { path: "*", element: <ErrorPage /> },
 ]);
